@@ -23,11 +23,12 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (GameManager.Instance == null || playerInput == null) return;
-        if (GameManager.Instance.currentState != GameState.Playing) return;
-        
-        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        transform.Translate(new Vector3(moveInput.x, moveInput.y, 0) * speed * Time.deltaTime);
+    if (GameManager.Instance == null || GameManager.Instance.currentState != GameState.Playing) return;
+    
+    if (playerInput == null) return;
+    
+    moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
+    transform.Translate(new Vector3(moveInput.x, moveInput.y, 0) * speed * Time.deltaTime);
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -41,9 +42,11 @@ public class PlayerController : MonoBehaviour
     void TakeDamage(float dmg)
     {
         currentHP -= dmg;
-        if (currentHP <= 0)
-        {
-            GameManager.Instance.GameOver();
-        }
+        Debug.Log("Player HP: " + currentHP);
+
+    if (currentHP <= 0)
+    {
+        GameManager.Instance.GameOver(); 
+    }
     }
 }
