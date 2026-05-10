@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null) return;
+
         if (pausePanel != null)
             pausePanel.SetActive(GameManager.Instance.currentState == GameState.Paused);
             
